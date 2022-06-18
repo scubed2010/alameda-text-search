@@ -1,0 +1,40 @@
+<mat-grid-list cols="12" rowHeight="60" gutterSize="10">
+    <mat-grid-tile [colspan]="8" [rowspan]="1">
+        <h1>Text Search Service</h1>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <button *ngIf="systemUp" mat-raised-button color="accent" (click)="resetForm()">Reset</button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <button *ngIf="systemUp" mat-raised-button color="warn" (click)="clearForm()">Clear</button>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+<p class="error" *ngIf="!systemUp">System is currently unavailable.  Please check back later.</p>
+
+<form [formGroup]="textSearchForm" (ngSubmit)="onSubmit()" *ngIf="systemUp">
+<mat-grid-list cols="3" rowHeight="100">
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <mat-form-field appearance="fill">
+            <mat-label>Sentance</mat-label>
+            <input matInput formControlName="sentence">
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field appearance="fill">
+            <mat-label>Search Word</mat-label>
+            <input matInput formControlName="searchWord">
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-checkbox formControlName="fullWordSearch">Full Word Search</mat-checkbox>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-checkbox formControlName="caseSensitiveSerch">Case Sensitive Search</mat-checkbox>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!textSearchForm.valid">Search</button>
+    </mat-grid-tile>
+</mat-grid-list>
+</form>
